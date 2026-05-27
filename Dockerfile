@@ -25,8 +25,8 @@ COPY app /app/app
 # alembic.ini опционально (если будете включать миграции позже)
 COPY alembic.ini /app/alembic.ini
 
-# Папка для uploads (static)
-RUN mkdir -p /app/var/uploads && adduser --disabled-password --gecos "" appuser \
+# Папки для uploads и локальной SQLite (если используется)
+RUN mkdir -p /app/var/uploads /app/var/db && adduser --disabled-password --gecos "" appuser \
     && chown -R appuser:appuser /app
 USER appuser
 

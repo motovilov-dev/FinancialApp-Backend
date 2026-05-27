@@ -10,12 +10,16 @@ services:
     environment:
       # В проде PUBLIC_BASE_URL должен совпадать с доменом Traefik
       PUBLIC_BASE_URL: "https://finance-app-prod.motovilov-cloud.ru"
+      # SQLite внутри контейнера должен лежать в writable-директории.
+      # ВАЖНО: строка вида sqlite+aiosqlite:///./finance.db в практике часто резолвится в /finance.db
+      # (root, read-only для непривилегированного пользователя) → "unable to open database file".
+      DATABASE_URL: "sqlite+aiosqlite:////app/var/db/finance.db"
       # Убедимся, что контейнер пишет uploads внутрь volume
       # (в коде путь относительный: var/uploads)
     volumes:
       - finance_uploads:/app/var/uploads
       # если используете SQLite в контейнере (не рекомендуется для прод):
-      - finance_db:/app/finance.db
+      - finance_db:/app/var/db
     networks:
       - traefik_default
     labels:
