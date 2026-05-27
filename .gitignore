@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+finance.db
+finance.db-journal
+var/
+.alembic_cache/
+.ruff_cache/
+.pytest_cache/
