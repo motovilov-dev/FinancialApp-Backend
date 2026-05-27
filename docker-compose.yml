@@ -15,7 +15,7 @@ services:
     volumes:
       - finance_uploads:/app/var/uploads
       # если используете SQLite в контейнере (не рекомендуется для прод):
-      # - finance_db:/app/finance.db
+      - finance_db:/app/finance.db
     networks:
       - traefik_default
     labels:
@@ -40,6 +40,7 @@ services:
 
 volumes:
   finance_uploads:
+  finance_db:
 
 networks:
   traefik_default:
